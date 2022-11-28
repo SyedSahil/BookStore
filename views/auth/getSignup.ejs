@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+</head>
+<body>
+    <%-include('../includes/navigation.ejs')%>
+    <% if(hasErrors) { %>
+        <div class="error_box">
+            <p><%= hasErrors.msg %></p>
+        </div>
+        <% } %>
+    
+    <form action="/auth/postSignup" method="post" class="form">
+        <div class="main">
+            <div class="form-control">
+                <label for="name">Name:</label>
+                <input type="text" name="name"
+                class="<%= hasErrors.param === 'name' ? 'error' : '' %>"
+                value="<% if(hasErrors) { %> <%= oldInputs.name %> <% } %>">
+                
+            </div>
+            <div class="form-control">
+                <label for="email">Email:</label>
+                <input type="email" name="email"
+                class="<%= hasErrors.param === 'email' ? 'error' : '' %>"
+                value="<% if(hasErrors) { %> <%= oldInputs.email %> <% } %>">
+            </div>
+            <div class="form-control">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="<%= hasErrors.param === 'password' ? 'error' : '' %>">
+            </div>
+            
+        </div>
+        <input type="text" name="_csrf" value="<%= csrfToken %>" hidden>
+        <button type="submit" class="btn">
+            Signup
+        </button>
+    </form>
+</body>
+</html>

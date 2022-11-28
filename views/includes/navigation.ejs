@@ -1,0 +1,22 @@
+<header> 
+    <div class="nav">
+      <div class="left">
+        <!-- <li class="list_item"><a href="/">Home</a></li> -->
+        <li class="list_item"><a href="/">Books</a></li>
+        <% if(isLoggedIn) { %>
+          <li class="list_item"><a href="/admin/add-book">Add Book</a></li>
+          <li class="list_item"><a href="/admin/books">Admin Books</a></li>
+          <% } %>
+      </div>
+      <div class="right">
+        <% if(!isLoggedIn) { %>
+        <li class="list_item"><a href="/auth/getSignup">Signup</a></li>
+        <li class="list_item"><a href="/auth/getLogin">Login</a></li>
+        <% } %>
+        <% if(isLoggedIn) { %>
+            <li class="list_item"><a href="/auth/postLogout">Logout</a></li>
+            <% } %>
+
+      </div>
+    </div>
+   </header>

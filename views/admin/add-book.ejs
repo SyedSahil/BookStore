@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+    <title>Shop</title>
+
+</head>
+<body>
+    <%-include('../includes/navigation.ejs')%>
+    <% if(hasErrors) { %>
+        <div class="error_box">
+            <p><%= errors.msg %></p>
+        </div>
+        <% } %>
+   <form action="/admin/add-book" method="post" class="form" enctype="multipart/form-data">
+    <div class="main">
+        <div class="form-control">
+            <label for="author">Author Name: </label>
+            <input type="text"
+            name="authorName"
+            value="<% if (editMode || hasErrors) { %><%= book.authorName %><% } %>"
+            class="<%= errors.param === 'authorName' ? 'error' : '' %>">
+        </div>
+
+        <div class="form-control">
+            <label for="bookName">Book Name: </label>
+            <input type="text"
+            name="bookName" 
+            value="<% if (editMode || hasErrors) { %><%= book.bookName %><% } %>"
+            class="<%= errors.param === 'bookName' ? 'error' : '' %>">
+        </div>
+    
+        <div class="form-control">
+            <label for="image">Image:</label>
+            <input type="file" name="image" class="image_picker">
+            <% if(editMode) { %>
+            <input type="text" name="imageUrl"  value="<% if (editMode) { %><%= book.imageUrl %><% } %>" hidden>
+            <% } %>
+        </div>
+
+        <div class="form-control">
+            <label for="image">Book pdf:</label>
+            <input type="file" name="book" class="image_picker">
+            <% if(editMode) { %>
+            <input type="text" name="pdfUrl"  value="<% if (editMode) { %><%= book.pdfUrl %><% } %>" hidden>
+            <% } %>
+        </div>
+    
+        <div class="form-control"> 
+            <label for="size">Size:</label>
+            <input type="text" name="size">
+        </div>
+    
+        <div class="form-control">
+            <label for="description">Description:</label>
+            <textarea name="description"cols="21"rows="5"class="<%= errors.param === 'description' ? 'error' : '' %>"><%if(editMode||hasErrors){%><%=book.description%><%}%></textarea>
+        </div>
+        <% if(editMode) { %>
+            <input type="text" name="id" value="<%= book._id %>" hidden>
+        <% } %>
+        
+    </div>
+    <input type="text" name="_csrf" value="<%= csrfToken %>" hidden>
+    <button type="submit">
+        <% if(editMode) { %>
+            Update
+        <% } %>
+        <% if(!editMode) { %>
+            Add
+        <% } %>
+            
+    </button>
+   </form>
+   
+</body>
+</html>

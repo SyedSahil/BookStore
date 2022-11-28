@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/navigation.css">
+</head>
+<body>
+    <%-include('../includes/navigation.ejs')%>
+    <% if(hasErrors) { %>
+        <div class="error_box">
+            <p><%= hasErrors.msg %></p>
+        </div>
+        <% } %>
+    <form action="/auth/postVerifyEmail" method="post" class="form">
+        <h1>We sent an OTP to your email.</h1>
+        <div class="main">
+            <div class="form-control">
+                <label for="otp">OTP:</label>
+                <input type="text" name="otp">
+            </div>
+        </div>
+        <input type="text" value="<%= num %>" name="num" hidden>
+        <input type="text" value="<%= email %>" name="email" hidden>
+        <input type="text" value="<%= password %>" name="password" hidden>
+        <input type="text" value="<%= name %>" name="name" hidden>
+        <input type="text" name="_csrf" value="<%= csrfToken %>" hidden>
+        <button type="submit" class="btn">
+            Verify
+        </button>
+    </form>
+</body>
+</html>

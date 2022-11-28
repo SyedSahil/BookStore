@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/navigation.css">
+    
+    <link rel="stylesheet" href="/css/product.css">
+    <title>Shop</title>
+
+</head>
+<body>
+  <%-include('../includes/navigation.ejs')%>
+  
+   <% if(!(books.length > 0)) { %>
+    <div class="noBooks">
+      No Books Found!
+    </div>
+    <% } %>
+   <div class="wrapper">
+    <% for (let book of books) { %>
+      <div class="container">
+        <div class="image">
+          <img src="<%= book.imageUrl %>">
+        </div>
+        <div class="description">
+          <div class="name">
+           <%= book.bookName %> by <%= book.authorName %>
+          </div>
+          <div class="description_box">
+            <%= book.description %>
+          </div>
+        </div>
+
+          <div class="buttons">
+            <% if(editMode) { %>
+              <button class="btn">
+                <a href="/admin/edit-book/<%= book._id %>">Edit</a>
+              </button>
+              <% } %>
+
+              <% if(editMode) { %>
+                <button class="btn" type="button">
+                  <a href="/admin/delete-book/<%= book._id %>">Delete</a>
+                </button>
+                <% } %>
+
+              <% if(!editMode) { %>
+                <button class="btn"  onclick="myFunction()">
+                  <a href="/book-detail/<%= book._id %>">Details</a>
+                </button>
+                <% } %>
+          </div>
+      </div>
+      <% } %>
+      </div>
+      <% if(books.length > 0) { %>
+        <% if(!editMode) { %>
+      <div class="pagination">
+
+        <% if(currentPage != 1 && previousPage != 1) { %>
+        <a href="/?page=1">1</a>
+        <% } %>
+
+        <% if(hasPreviousPage) { %>
+        <a href="/?page= <%= previousPage %>"><%= previousPage %></a>
+        <% } %>
+        
+        <a href="/?page= <%= currentPage %>"><%= currentPage %></a>
+        
+
+        
+        <% if(hasNextPage) { %> 
+        <a href="/?page=<%= nextPage %>"><%= nextPage %></a>
+        <% } %>
+
+          
+        <% if(currentPage != lastPage && nextPage != lastPage) { %> 
+          <a href="/?page=<%= lastPage %>"><%= lastPage %></a>
+          <% } %>
+      </div>
+      <% } %>
+      <% } %>
+
+
+      <% if(books.length > 0) { %>
+        <% if(editMode) { %>
+      <div class="pagination">
+
+        <% if(currentAdminPage != 1 && previousAdminPage != 1) { %>
+        <a href="/admin/books/?page=1">1</a>
+        <% } %>
+
+        <!-- <% if(hasPreviousAdminPage) { %>
+        <a href="/admin/books/?page= <%= previousAdminPage %>"><%= previousAdminPage %></a>
+        <% } %> -->
+        
+        <a href="/admin/books/?page= <%= currentAdminPage %>"><%= currentAdminPage %></a>
+        
+
+        
+        <% if(hasNextAdminPage) { %> 
+        <a href="/admin/books/?page=<%= nextAdminPage %>"><%= nextAdminPage %></a>
+        <% } %>
+
+          
+        <% if(currentAdminPage != lastAdminPage && nextAdminPage != lastAdminPage) { %> 
+          <a href="/admin/books/?page=<%= lastAdminPage %>"><%= lastAdminPage %></a>
+          <% } %>
+      </div>
+      <% } %>
+      <% } %>
+
+      
+</body>
+</html>

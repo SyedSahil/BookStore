@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/navigation.css">
+    <link rel="stylesheet" href="/css/book-detail.css">
+    <title>Shop</title>
+
+</head>
+<body>
+  <%-include('../includes/navigation.ejs')%>
+        <div class="wrapper">
+            <div class="container">
+                <div class="image">
+                  <img src="<%= book.imageUrl %>">
+                </div>
+                <div class="description">
+                  <div class="name">
+                   <%= book.bookName %> by <%= book.authorName %>
+                  </div>
+                  <div class="description_box">
+                    <%= book.description %>
+                  </div>
+                </div>
+                <div>
+                  <button class="btn">
+                    <a href="/book-download/<%= book._id %>">Download</a>
+                  </button>
+                </div>
+              </div>
+              
+        </div>
+      
+</body>
+</html>
